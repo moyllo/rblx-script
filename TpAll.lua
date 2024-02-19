@@ -19,7 +19,7 @@ tpButton.BorderSizePixel = 0
 tpButton.Position = UDim2.new(0, 0, 0, 0)
 tpButton.Size = UDim2.new(1, 0, 1, 0) -- Fills the box
 tpButton.Font = Enum.Font.SourceSans
-tpButton.Text = "TP"
+tpButton.Text = "TP & Shoot"
 tpButton.TextColor3 = Color3.fromRGB(255, 255, 255) -- White text
 tpButton.TextSize = 20
 
@@ -30,10 +30,11 @@ tpButton.MouseButton1Click:Connect(function()
         isTeleporting = true
         while isTeleporting do
             local players = game:GetService("Players"):GetPlayers()
-            for _, player in ipairs(players) do
-                if player ~= game.Players.LocalPlayer then
-                    game.Players.LocalPlayer.Character:MoveTo(player.Character.HumanoidRootPart.Position)
-                end
+            local randomPlayer = players[math.random(1, #players)]
+            if randomPlayer ~= game.Players.LocalPlayer then
+                game.Players.LocalPlayer.Character:MoveTo(randomPlayer.Character.HumanoidRootPart.Position)
+                -- Simulate shooting
+                game.ReplicatedStorage.RemoteEvents.ShootEvent:FireServer(randomPlayer.Character.HumanoidRootPart.Position)
             end
             wait(0.1)
         end
@@ -44,7 +45,7 @@ end)
 
 -- Notification display
 game:GetService("StarterGui"):SetCore("SendNotification", { 
-    Title = "[TEST] TP All GUI";
+    Title = "[TEST] TP & Shoot Random Player GUI";
     Text = "BY MOYLLO";
     Icon = "rbxthumb://type=Asset&id=5107182114&w=150&h=150"
 })
