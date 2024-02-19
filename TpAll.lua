@@ -33,10 +33,10 @@ tpButton.MouseButton1Click:Connect(function()
             local randomPlayer = players[math.random(1, #players)]
             if randomPlayer ~= game.Players.LocalPlayer then
                 game.Players.LocalPlayer.Character:MoveTo(randomPlayer.Character.HumanoidRootPart.Position)
-                -- Simulate shooting
-                game.ReplicatedStorage.RemoteEvents.ShootEvent:FireServer(randomPlayer.Character.HumanoidRootPart.Position)
+                -- Simulate shooting towards the player
+                game.ReplicatedStorage.RemoteEvents.ShootEvent:FireServer(randomPlayer)
             end
-            wait(0.1)
+            wait(1)
         end
     else
         isTeleporting = false
