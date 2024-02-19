@@ -26,13 +26,15 @@ tpButton.TextSize = 20
 local speaker = game:GetService("Players").LocalPlayer
 
 tpButton.MouseButton1Click:Connect(function()
-    -- Boucle à travers tous les joueurs sauf vous-même
-    for _, player in ipairs(game.Players:GetPlayers()) do
-        if player ~= speaker then
-            -- Téléporte chaque joueur à vous
-            player.Character:MoveTo(speaker.Character.HumanoidRootPart.Position)
+    local plr = game:GetService("Players").LocalPlayer
+    for i,v in pairs(game:GetService("Players"):GetChildren()) do
+        if v.ClassName == "Player" and v.Name ~= plr.Name then
+            if v.Character:FindFirstChild("HumanoidRootPart") then
+                v.Character.HumanoidRootPart.CFrame = CFrame.new(plr.Character.HumanoidRootPart.Position)
+            end
         end
     end
+
 end)
 
 -- Affichage de la notification
