@@ -1,6 +1,5 @@
 --Get the StarterGui service
 local StarterGui = game:GetService("StarterGui")
-
 --Use a repeat to make sure we get our system message
 --The repeat will only stop once the function successfully runs
 repeat
